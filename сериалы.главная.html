@@ -1,0 +1,664 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+ <title>Lego Kids</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Roboto:wght@300&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.6;
+  background: linear-gradient(135deg, #1a0000 0%, #2a0000 100%);
+  color: #fff;
+}
+
+/* Типография */
+h1, h2, h3, h4, h5 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  color: #ff3333;
+  text-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #f0f0f0;
+  margin-bottom: 1rem;
+}
+
+a {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  color: #ff3333;
+}
+
+a:hover {
+  color: #ff6666;
+  text-shadow: 0 0 8px rgba(255, 51, 51, 0.5);
+}
+
+/* Шапка и подвал */
+header, footer {
+  background: linear-gradient(135deg, #1f0000 0%, #3d0000 100%);
+  padding: 20px;
+  box-shadow: 0 2px 20px rgba(255, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 51, 51, 0.3);
+  border-top: 1px solid rgba(255, 51, 51, 0.3);
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: rgba(255, 51, 51, 0.3);
+    box-shadow: 0 2px 20px rgba(255, 0, 0, 0.2);
+  }
+  50% {
+    border-color: rgba(255, 51, 51, 0.8);
+    box-shadow: 0 2px 30px rgba(255, 0, 0, 0.4);
+  }
+}
+
+/* Навигационное меню */
+#menu1 {
+  position: relative;
+  display: block;
+  width: 100%;
+  z-index: 10;
+}
+
+#menu1 ul {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+}
+
+#menu1 > ul::after {
+  display: block;
+  width: 100%;
+  height: 0;
+  clear: both;
+  content: " ";
+}
+
+#menu1 ul li {
+  position: relative;
+  display: block;
+  float: left;
+  width: auto;
+  height: auto;
+}
+
+#menu1 ul li a {
+  display: block;
+  padding: 12px 25px;
+  font-size: 14px;
+  line-height: 1.3;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ff3333;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#menu1 ul li a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 51, 51, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+#menu1 ul li a:hover::before {
+  left: 100%;
+}
+
+#menu1 ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 25px;
+  right: 25px;
+  height: 2px;
+  background: linear-gradient(90deg, #ff3333, #ff6666, #ff3333);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  background-size: 200% 100%;
+  animation: gradientShift 2s linear infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#menu1 ul li a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Выпадающее меню */
+#menu1 ul li ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  width: 220px;
+  background: linear-gradient(135deg, #2a0000 0%, #3d0000 100%);
+  box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  animation: slideDown 0.3s ease;
+  border: 1px solid rgba(255, 51, 51, 0.3);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scaleY(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+#menu1 ul li:hover ul {
+  display: block;
+}
+
+#menu1 ul li ul li {
+  float: none;
+  width: 100%;
+  animation: fadeIn 0.5s ease forwards;
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+#menu1 ul li ul li:nth-child(1) { animation-delay: 0.1s; }
+#menu1 ul li ul li:nth-child(2) { animation-delay: 0.2s; }
+#menu1 ul li ul li:nth-child(3) { animation-delay: 0.3s; }
+#menu1 ul li ul li:nth-child(4) { animation-delay: 0.4s; }
+#menu1 ul li ul li:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+#menu1 ul li ul li a {
+  display: block;
+  text-transform: none;
+  height: auto;
+  padding: 10px 25px;
+  width: 100%;
+  border-top: 1px solid rgba(255, 51, 51, 0.2);
+  color: #ff3333;
+  font-size: 13px;
+}
+
+#menu1 ul li ul li a::before,
+#menu1 ul li ul li a::after {
+  display: none;
+}
+
+#menu1 ul li ul li a:hover {
+  background: rgba(255, 51, 51, 0.1);
+  padding-left: 35px;
+  color: #ff6666;
+}
+
+#menu1 ul li ul li:first-child a {
+  border-top: 0;
+}
+
+/* Основной контент */
+main {
+  padding: 30px 20px;
+  min-height: calc(100vh - 200px);
+  position: relative;
+  overflow: hidden;
+}
+
+main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 51, 51, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Карточки постов */
+.post {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  display: flex;
+  gap: 30px;
+  box-shadow: 0 5px 20px rgba(255, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 51, 51, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.post::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 51, 51, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.post:hover::before {
+  opacity: 1;
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.post:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(255, 0, 0, 0.3);
+  border-color: rgba(255, 51, 51, 0.5);
+}
+
+.post img {
+  margin: 0;
+  border-radius: 10px;
+  max-width: 300px;
+  height: auto;
+  object-fit: cover;
+  transition: all 0.5s ease;
+  border: 2px solid rgba(255, 51, 51, 0.3);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+  animation: imagePulse 3s ease-in-out infinite;
+}
+
+@keyframes imagePulse {
+  0%, 100% {
+    border-color: rgba(255, 51, 51, 0.3);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+  }
+  50% {
+    border-color: rgba(255, 51, 51, 0.8);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+  }
+}
+
+.post:hover img {
+  transform: scale(1.05) rotate(1deg);
+  border-color: #ff3333;
+}
+
+.post-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.post h2 {
+  margin-top: 0;
+  color: #ff3333;
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% { text-shadow: 0 0 10px rgba(255, 51, 51, 0.3); }
+  50% { text-shadow: 0 0 20px rgba(255, 51, 51, 0.6); }
+}
+
+/* Подвал */
+footer {
+  margin-top: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 51, 51, 0.1), transparent);
+  animation: scanLine 8s linear infinite;
+}
+
+@keyframes scanLine {
+  0% { left: -100%; }
+  20%, 100% { left: 100%; }
+}
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-column {
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+
+.footer-column h4 {
+  color: #ff3333;
+  margin-bottom: 15px;
+  font-size: 16px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footer-column h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #ff3333, transparent);
+  animation: lineWidth 3s ease-in-out infinite;
+}
+
+@keyframes lineWidth {
+  0%, 100% { width: 40px; }
+  50% { width: 60px; }
+}
+
+.footer-column ul {
+  list-style: none;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.footer-column ul li:hover {
+  transform: translateX(5px);
+}
+
+.footer-column ul li a {
+  color: #ff9999;
+  font-size: 14px;
+  letter-spacing: normal;
+  text-transform: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.footer-column ul li a::before {
+  content: '▶';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  color: #ff3333;
+  transition: all 0.3s ease;
+  font-size: 10px;
+}
+
+.footer-column ul li a:hover {
+  transform: translateX(10px);
+  color: #ff3333;
+  text-shadow: 0 0 8px rgba(255, 51, 51, 0.5);
+}
+
+.footer-column ul li a:hover::before {
+  transform: translateY(-50%) scale(1);
+  left: -15px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .post {
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .post img {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  #menu1 ul li {
+    float: none;
+    width: 100%;
+  }
+  
+  #menu1 ul li ul {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    background: rgba(255, 51, 51, 0.1);
+  }
+  
+  .footer-columns {
+    flex-direction: column;
+  }
+  
+  .footer-column {
+    margin: 10px 0;
+  }
+}
+
+/* Утилиты */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Кнопки и интерактивные элементы */
+button, .button {
+  background: linear-gradient(135deg, #330000 0%, #660000 100%);
+  color: #ff3333;
+  border: 1px solid #ff3333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before, .button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 51, 51, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+button:hover::before, .button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+button:hover, .button:hover {
+  background: linear-gradient(135deg, #660000 0%, #990000 100%);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+  transform: scale(1.05);
+}
+
+/* Скроллбар */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a0000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #660000 0%, #990000 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #990000 0%, #cc0000 100%);
+}
+
+/* Выделение текста */
+::selection {
+  background: #ff3333;
+  color: #000;
+}
+
+::-moz-selection {
+  background: #ff3333;
+  color: #000;
+}
+</style>
+</head>
+<body>
+<header>
+    <img src="https://i.postimg.cc/bJptxPg6/transformed.png" width="290" draggable="false" alt="Logo">
+ <nav id="menu1">
+<ul>
+ <li><a href="главная.html">Главная</a></li>
+ <li><a href="портфолио.html">Обратная связь</a></li>
+ <li><a href="мультимедия">Мультимедия</a>
+ <ul>
+ <li><a href="аниме.главная.html">Аниме</a></li>
+<li><a href="Дорамы.главные.html">Дорамы</a></li>
+<li><a href="лего.главная.html">Мультики</a></li>
+<li><a href="сериалы.главная.html">Сериалы</a></li>
+<li><a href="фильмы.главная.html">Фильмы</a></li>
+ </ul>
+ </li>
+ <li><a href="обратная.связь.html">Обратная связь</a></li>
+ <li><a href="#m5">MENU</a></li>
+</ul>
+</nav>
+
+</header>
+<main>
+  <div class="pos">
+    <div class="post">
+      <img height="230" src="https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/fb35416f-3b0d-4b96-bc65-cf6923f9e329/220x330" alt="Card image cap">
+      <div>
+        <h3>Во все тяжкие</h3>
+        
+        <p>
+          Во все тяжкие» (англ. Breaking Bad) — американская телевизионная криминальная драма, премьерные серии которой транслировались с 20 января 2008 года по 29 сентября 2013 года по кабельному каналу AMC. На протяжении пяти сезонов, состоящих из 62 эпизодов, показана история Уолтера Уайта (Брайан Крэнстон), школьного учителя, у которого диагностировали неоперабельный рак лёгких и который, вместе со своим бывшим учеником Джесси Пинкманом (Аарон Пол), начинает производить и продавать метамфетамин, чтобы обеспечить финансовое будущее своей семьи. Постановка и съёмка сериала велись в городе Альбукерке (штат Нью-Мексико).
+
+Создатель и исполнительный продюсер сериала — Винс Гиллиган. Главные роли в сериале исполнили Брайан Крэнстон, сыгравший Уолтера Уайта, и Аарон Пол, ставший его сообщником Джесси Пинкманом. Анна Ганн стала Скайлер Уайт — женой Уолтера Уайта, Ар-Джей Митт — его сыном. Бетси Брандт исполнила роль сестры Скайлер — Мари Шрейдер, а её мужа Хэнка Шрейдера сыграл Дин Норрис. Начиная со второго сезона Уолтер нанял адвоката Сола Гудмана, в роли которого выступил Боб Оденкерк. Он в свою очередь познакомил Уолта с частным сыщиком Майком Эрмантраутом, сыгранным Джонатаном Бэнксом. Временным работодателем Уолта в сфере наркоторговли стал Густаво Фринг в исполнении Джанкарло Эспозито. В заключительном сезоне сериала появились Джесси Племонс в роли Тода Алкиста, временного сообщника Уолтера Уайта, и Лора Фрейзер в роли Лидии Родарт-Куэйл, новой компаньонки Уолта.
+        </p>
+        
+        <a href="сериалы4.1.html">Подробнее</a>
+      </div>
+    </div>
+    <div class="post">
+      <img height="230" src="https://media.2x2tv.ru/content/images/size/w1440h1080/2025/02/Dexter-Original-Sin-------.jpg" alt="Card image cap">
+      <div>
+        <h3>Декстер</h3>
+        <p>
+          «Де́кстер»[2] (англ. Dexter) — американский телесериал, основанный на романе Джеффа Линдси «Дремлющий демон Декстера» (англ. Darkly Dreaming Dexter, дословно «Мрачно грезящий Декстер») и адаптированный для телевидения лауреатом премии «Эмми», сценаристом Джеймсом Маносом, который написал сценарий для пилотного эпизода. Демонстрировался на канале Showtime с 1 октября 2006 года по 22 сентября 2013 года. События сериала рассказывают о Декстере Моргане (Майкл Си Холл), вымышленном серийном убийце, работающем судебным экспертом по брызгам крови в полиции Майами. Сериал неоднократно номинировался на различные премии, такие как «Эмми», IGN, Satellite Award и «Сатурн». Также сериал подвергался критике со стороны родительских организаций (таких как Parents Television Council) как излишне жестокий и аморальный.
+
+В октябре 2020 года было объявлено, что «Декстер» вернётся на экраны в виде 10-серийного мини-сериала. Майкл Си Холл вновь исполнил роль Декстера Моргана, а исполнительным продюсером снова стал Клайд Филлипс, который был задействован в производстве первых четырёх сезонов. Премьера 10-серийного мини-сериала «Декстер: Новая кровь» состоялась 7 ноября 2021 года[3]. В декабре 2024 года вышел приквел «Декстер: Первородный грех», а в 2025 году вышел сиквел «Декстер: Воскрешение».
+        </p>
+        <a href="сериалы4.2.html">Подробнее</a>
+      </div>
+    </div>
+    <div class="post">
+      <img height="230" src="https://upload.wikimedia.org/wikipedia/ru/b/b1/Stranger_Things_season_1.jpg" alt="Card image cap">
+      <div>
+        <h3>Очень странные дела</h3>
+        <p>
+          «О́чень стра́нные дела́»[7][8] (англ. Stranger Things) — американский драматический сериал, созданный братьями Даффер для стриминг-сервиса Netflix. Проект был выпущен студиями Monkey Massacre Productions и 21 Laps Entertainment. Премьера восьми эпизодов первого сезона состоялась на Netflix 15 июля 2016 года. Второй сезон вышел в октябре 2017 года, третий — в июле 2019 года, четвёртый был разбит на две части, выпущенные соответственно в мае и июле 2022 года. Пятый и финальный сезон разбит, в свою очередь, на три части, которые вышли 26 ноября, 25 и 31 декабря 2025 года[9][10]. Сериал представляет собой смесь ужасов, драмы, научной фантастики, мистерии и истории взросления.
+
+Действие сериала показываются в 1980-х годах в вымышленном городке Хоукинс, штат Индиана; жители Хоукинса — дети, подростки и взрослые — сталкиваются с влиянием чуждого и опасного параллельного измерения — «Изнанки» (англ. Upside Down). На протяжении всех сезонов исполнителями главных ролей являются Вайнона Райдер, Дэвид Харбор, Финн Вулфхард, Милли Бобби Браун, Гейтен Матараццо, Калеб Маклафлин, Наталия Дайер, Чарли Хитон, Кара Буоно, Мэттью Модайн, Ноа Шнапп, Сэди Синк, Джо Кири, Дейкр Монтгомери, Шон Астин, Пол Райзер, Майя Хоук, Приа Фергюсон, Бретт Гельман, Линда Хэмилтон, Джейми Кэмпбелл Бауэр и Нелл Фишер.
+        </p>
+        <a href="сериалы4.2.html">Подробнее</a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <div>
+    <div>
+      <div>
+        <img src="https://i.postimg.cc/bJptxPg6/transformed.png" alt="Logo" width="250">
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3>О нас</h3>
+          <p>
+            Пока дети строят свои собственные миры из кубиков LEGO, мы играем свою роль в том, чтобы оказывать положительное влияние на мир, в котором они живут сегодня и который унаследуют в будущем.
+          </p>
+        </div>
+        <div class="footer-column">
+          <h3>Свяжитесь с нами</h3>
+          <p>
+            Если вы заинтересованы в работе со мной или просто хотите поздороваться, просто напишите по электронной почте.
+            <br><strong>Email: <a href="#">contact@mail.com</a></strong>
+          </p>
+        </div>
+      </div>
+    </div>
+    <center>
+      <small>Copyright &copy; 2025</small>
+    </center>
+  </div>
+</footer>
+</body>
+</html>
